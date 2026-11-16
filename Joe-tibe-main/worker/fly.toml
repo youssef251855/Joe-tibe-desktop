@@ -1,0 +1,21 @@
+# flyctl deploy --remote-only
+# Setup: `fly launch` (or `flyctl launch`) in this folder, pick an app name, then
+# `fly secrets set WORKER_KEY=<long-random-string>` and `fly deploy`.
+# The URL Vercel uses will be https://<your-app-name>.fly.dev
+app = "joetube-worker"
+primary_region = "iad"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "512mb"

@@ -1,0 +1,11 @@
+name = "joetube-api"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+
+[vars]
+# Put your Vercel domain here in production, e.g. "https://joetube.vercel.app"
+CORS_ORIGIN = "*"
+
+# Optional secrets (wrangler secret put NAME):
+#   YT_COOKIE    - cookie string of a (secondary) YouTube account
+#   YT_PO_TOKEN  - a PO token if you have one

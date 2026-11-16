@@ -1,0 +1,12 @@
+node_modules
+.env*
+.vercel
+dist
+worker
+backend/bin
+backend/plugins
+backend/Dockerfile
+backend/render.yaml
+migrated_prompt_history
+cloudflare
+desktop

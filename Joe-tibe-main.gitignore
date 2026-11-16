@@ -1,0 +1,16 @@
+node_modules
+dist
+.vercel
+.env*
+*.local
+logs
+*.log
+.DS_Store
+.idea
+.vscode/*
+!.vscode/extensions.json
+
+# desktop (Electron)
+desktop/node_modules
+desktop/app
+desktop/release

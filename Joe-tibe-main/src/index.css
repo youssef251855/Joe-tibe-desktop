@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gold: #ffd400;
+  --color-gold-2: #f5a800;
+  --color-ink: #050506;
+  --color-panel: #101014;
+  --color-panel-2: #16161c;
+  --color-hairline: #26262e;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: "Cairo", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: #050506;
+    color: #f4f4f5;
+  }
+}
+
+/* Neon gold glow used on the primary CTA + active nav */
+@keyframes pulseGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 15px rgba(255, 212, 0, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 32px rgba(255, 212, 0, 0.65);
+  }
+}
+
+.pulse-glow {
+  animation: pulseGlow 2.6s infinite;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out both;
+}
+
+/* Reusable gold gradient text */
+.text-gold-grad {
+  background: linear-gradient(100deg, #ffe14d 0%, #ffd400 45%, #f5a800 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Gold primary button surface */
+.bg-gold-grad {
+  background: linear-gradient(100deg, #ffe14d 0%, #ffd400 50%, #f5a800 100%);
+}
+
+/* Ambient radial glows behind the dashboard */
+.bg-neon-field {
+  background:
+    radial-gradient(60% 55% at 85% 0%, rgba(255, 212, 0, 0.12) 0%, rgba(255, 212, 0, 0) 60%),
+    radial-gradient(55% 50% at 0% 100%, rgba(245, 168, 0, 0.1) 0%, rgba(245, 168, 0, 0) 55%),
+    #050506;
+}
+
+/* Thin custom scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #2a2a32 transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #2a2a32;
+  border-radius: 999px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #3a3a44;
+}
+
+/* ===== Light mode =====
+   Dark is the base design. When <html data-theme="light"> is set we re-scope the
+   recurring dark tokens to light values, so the whole dashboard flips without
+   touching individual components. */
+[data-theme="light"] body {
+  background-color: #f6f7f9;
+  color: #17181c;
+}
+
+[data-theme="light"] .bg-\[\#101014\] { background-color: #ffffff !important; }
+[data-theme="light"] .bg-\[\#050506\] { background-color: #f1f2f4 !important; }
+[data-theme="light"] .bg-\[\#141419\] { background-color: #eceef1 !important; }
+[data-theme="light"] .bg-\[\#1c1c22\] { background-color: #e6e8ec !important; }
+[data-theme="light"] .bg-\[\#0a0a0d\]\/85 { background-color: rgba(255, 255, 255, 0.85) !important; }
+[data-theme="light"] .bg-\[\#0a0a0d\]\/95 { background-color: rgba(255, 255, 255, 0.95) !important; }
+[data-theme="light"] .hover\:bg-\[\#141419\]:hover { background-color: #eceef1 !important; }
+
+[data-theme="light"] .border-\[\#26262e\] { border-color: #e3e5ea !important; }
+
+[data-theme="light"] .text-white { color: #14161a !important; }
+[data-theme="light"] .hover\:text-white:hover { color: #14161a !important; }
+[data-theme="light"] .text-zinc-100 { color: #17181c !important; }
+[data-theme="light"] .text-zinc-200 { color: #17181c !important; }
+[data-theme="light"] .text-zinc-300 { color: #33363d !important; }
+[data-theme="light"] .text-zinc-400 { color: #54585f !important; }
+[data-theme="light"] .text-zinc-500 { color: #6b7280 !important; }
+[data-theme="light"] .text-zinc-600 { color: #9ca3af !important; }
+
+/* Hero banner becomes a soft light-gold panel in light mode */
+[data-theme="light"] .from-\[\#1a1400\] { --tw-gradient-from: #fff4d6; }
+[data-theme="light"] .via-\[\#0d0b04\] { --tw-gradient-via: #fbeec6; }
+[data-theme="light"] .to-\[\#050506\] { --tw-gradient-to: #f2f3f5; }
+
+[data-theme="light"] .bg-neon-field {
+  background:
+    radial-gradient(60% 55% at 85% 0%, rgba(245, 168, 0, 0.12) 0%, rgba(245, 168, 0, 0) 60%),
+    radial-gradient(55% 50% at 0% 100%, rgba(255, 212, 0, 0.14) 0%, rgba(255, 212, 0, 0) 55%),
+    #f6f7f9;
+}

@@ -1,0 +1,80 @@
+{
+  "name": "joetube-desktop",
+  "productName": "JoeTube",
+  "version": "1.0.0",
+  "description": "JoeTube - تحميل الفيديو والصوت من يوتيوب وتيك توك وفيسبوك وإنستغرام",
+  "author": "JOE COMPANY",
+  "main": "main.cjs",
+  "private": true,
+  "scripts": {
+    "prepare-app": "node scripts/build-all.cjs",
+    "start": "npm run prepare-app && electron .",
+    "start:fast": "electron .",
+    "dist": "npm run prepare-app && electron-builder --win nsis --x64 --publish never",
+    "dist:portable": "electron-builder --win portable --x64 --publish never"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "undici": "^7.30.1",
+    "youtubei.js": "^18.2.0",
+    "yt-search": "^2.13.1",
+    "ffmpeg-static": "^5.2.0"
+  },
+  "devDependencies": {
+    "electron": "^45.0.0",
+    "electron-builder": "^26.0.0"
+  },
+  "build": {
+    "appId": "com.joetube.desktop",
+    "productName": "JoeTube",
+    "copyright": "© JOE COMPANY",
+    "asar": false,
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "main.cjs",
+      "server.cjs",
+      "downloader.cjs",
+      "package.json",
+      "build/icon.png",
+      "app/**/*"
+    ],
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "JoeTube",
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "installerHeaderIcon": "build/icon.ico",
+      "artifactName": "JoeTube-Setup-${version}.exe"
+    },
+    "portable": {
+      "artifactName": "JoeTube-Portable-${version}.exe"
+    }
+  },
+  "allowScripts": {
+    "electron": true,
+    "ffmpeg-static": true
+  }
+}

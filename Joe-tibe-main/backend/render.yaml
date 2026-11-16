@@ -1,0 +1,45 @@
+# Render blueprint — deploys the JoeTube API backend (Express) as a standalone web service.
+# The frontend is hosted separately (e.g. Vercel) and calls this service via VITE_API_BASE.
+# Render's "Root Directory" for this service must be the /backend folder.
+services:
+  - type: web
+    name: joetube-api
+    runtime: node
+    plan: free
+    region: singapore
+    # No frontend build here — this folder contains only the Express API.
+    buildCommand: npm install
+    # Long-lived process (no serverless 60s limit). tsx is a runtime dependency.
+    startCommand: NODE_ENV=production npx tsx server.ts
+    # Cheap keepalive endpoint; also use this URL in UptimeRobot: https://<url>/ping
+    healthCheckPath: /ping
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      # Allow the separately-hosted frontend (e.g. Vercel) to call this API.
+      - key: CORS_ORIGIN
+        value: "*"
+      # Set these in the Render dashboard (Secret) to unlock bot-checked YouTube
+      # videos from Render's datacenter IP. The proxy is the most complete fix.
+      # - key: YT_COOKIE
+      #   sync: false
+      # - key: YT_PROXY
+      #   sync: false
+
+# --- Alternative: Docker service (PAID plan) with yt-dlp + ffmpeg for stronger extraction ---
+# Uncomment and comment the Node service above to enable the local yt-dlp engine (./Dockerfile).
+# services:
+#   - type: web
+#     name: joetube-api
+#     runtime: docker
+#     plan: starter
+#     region: singapore
+#     dockerfilePath: ./Dockerfile
+#     healthCheckPath: /ping
+#     envVars:
+#       - key: CORS_ORIGIN
+#         value: "*"
+#       - key: YT_COOKIE
+#         sync: false
+#       - key: YT_PROXY
+#         sync: false

@@ -1,0 +1,8 @@
+{
+  "name": "JoeTube - جو تيوب محمل يوتيوب بدون سيرفرات وسيطة",
+  "description": "منصة سيرفرلس متطورة لتحميل مقاطع يوتيوب بجودة عالية MP4 و MP3 مباشرة عبر Express بدون سيرفرات وسيطة مع دعم البحث وقوائم التشغيل والتحميل الفوري الموثوق.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
